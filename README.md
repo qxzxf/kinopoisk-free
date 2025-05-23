@@ -43,9 +43,9 @@
 ## 🖼️ Как это выглядит
 
 - Кнопка на сайте Кинопоиска:
-  ![Кнопка на сайте]![image](https://github.com/user-attachments/assets/bc7e4b9a-b562-4950-923a-54ed5bbd5ba2)
+  ![Кнопка на сайте](https://github.com/user-attachments/assets/bc7e4b9a-b562-4950-923a-54ed5bbd5ba2)
 - Окно расширения:
-  ![Окно расширения]![image](https://github.com/user-attachments/assets/318db566-8eaa-4954-b0fb-48fafcc2c766)
+  ![Окно расширения](https://github.com/user-attachments/assets/318db566-8eaa-4954-b0fb-48fafcc2c766)
 
 ---
 
