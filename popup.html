@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Кинопоиск VIP</title>
+    <style>
+        body {
+            width: 400px;
+            min-height: 520px;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d1457 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .popup-card {
+            background: rgba(34, 24, 58, 0.98);
+            border-radius: 22px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37), 0 1.5px 8px 0 rgba(138, 43, 226, 0.10);
+            padding: 32px 28px 18px 28px;
+            width: 350px;
+            min-height: 440px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            position: relative;
+        }
+        .title {
+            text-align: center;
+            margin-bottom: 24px;
+            color: #b983ff;
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 0 2px 8px rgba(138, 43, 226, 0.15);
+        }
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            flex: 1;
+        }
+        input[type="text"] {
+            padding: 14px 18px;
+            border: 2px solid #3d246c;
+            border-radius: 12px;
+            background: rgba(47, 43, 62, 0.7);
+            color: #fff;
+            font-size: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(138, 43, 226, 0.07);
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #b983ff;
+            box-shadow: 0 0 12px 2px rgba(185, 131, 255, 0.18);
+        }
+        input[type="text"]::placeholder {
+            color: #b3a6d9;
+        }
+        .buttons {
+            display: flex;
+            gap: 12px;
+        }
+        button {
+            flex: 1;
+            padding: 13px 0;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #b983ff 0%, #8a2be2 100%);
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.7px;
+            box-shadow: 0 2px 8px rgba(138, 43, 226, 0.10);
+        }
+        button:hover {
+            background: linear-gradient(135deg, #d1b3ff 0%, #b983ff 100%);
+            color: #2d1457;
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 18px rgba(138, 43, 226, 0.18);
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        .notification {
+            position: fixed;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+            color: white;
+            padding: 13px 28px;
+            border-radius: 10px;
+            font-size: 15px;
+            animation: slideIn 0.3s ease-out;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(255, 68, 68, 0.18);
+        }
+        .search-results {
+            margin-top: 18px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            padding-right: 5px;
+        }
+        .search-results.active {
+            display: block;
+        }
+        .film-item {
+            display: flex;
+            align-items: center;
+            padding: 13px 10px;
+            border-radius: 10px;
+            background: rgba(47, 43, 62, 0.7);
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(185, 131, 255, 0.10);
+            box-shadow: 0 2px 8px rgba(138, 43, 226, 0.07);
+        }
+        .film-item:hover {
+            background: rgba(185, 131, 255, 0.13);
+            transform: translateX(7px) scale(1.02);
+        }
+        .film-poster {
+            width: 52px;
+            height: 78px;
+            border-radius: 8px;
+            margin-right: 18px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+        }
+        .film-info {
+            flex: 1;
+        }
+        .film-title {
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #fff;
+            font-size: 16px;
+        }
+        .film-year {
+            font-size: 13px;
+            color: #b3a6d9;
+        }
+        .loading {
+            text-align: center;
+            padding: 22px;
+            color: #b3a6d9;
+            font-size: 15px;
+        }
+        .author {
+            text-align: center;
+            margin-top: 28px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(185, 131, 255, 0.13);
+            color: #b983ff;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            opacity: 0.85;
+        }
+        @keyframes slideIn {
+            from {
+                transform: translate(-50%, -100%);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(47, 43, 62, 0.5);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #b983ff;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8a2be2;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup-card">
+        <div class="title">Кинопоиск VIP</div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Введите название фильма...">
+            <div class="buttons">
+                <button id="searchKinopoisk">Найти фильм</button>
+                <button id="searchVIP">Найти по ID</button>
+            </div>
+            <div class="search-results" id="searchResults">
+                <!-- Здесь будут результаты поиска -->
+            </div>
+        </div>
+        <div class="author">by qxzxf</div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html> 

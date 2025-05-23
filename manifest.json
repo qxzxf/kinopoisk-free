@@ -1,9 +1,19 @@
 {
   "manifest_version": 3,
-  "name": "Кинопоиск qx",
+  "name": "Кинопоиск VIP",
   "version": "1.0",
-  "description": "Добавляет кнопку для перехода на Кинопоиск qx",
-  "permissions": ["activeTab"],
+  "description": "Поиск фильмов на Кинопоиске и Кинопоиск VIP",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
   "content_scripts": [
     {
       "matches": ["*://www.kinopoisk.ru/film/*"],
